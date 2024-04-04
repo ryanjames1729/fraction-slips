@@ -34,11 +34,15 @@ function convertToFraction(decimal: number) {
                 repeating = true
             }
         }
+        if(decimalPart[decimalPart.length-2] !== decimalPart[decimalPart.length-1]){
+            repeating = false
+        }
 
         if(repeating) {
             repeating = false
-            let top = Math.round(decimal*10-decimal)
-            let bot = 9
+            let top = Math.round((decimal*100-decimal)*10)/10
+            let bot = 99
+            console.log(top, bot)
             let num = Math.round(top / gcd(top, bot))
             let deno = Math.round(bot / gcd(top, bot))
             return num + "/" + deno
@@ -97,15 +101,32 @@ export default function Slips() {
     const [buttonFourteen, setButtonFourteen] = useState(false)
     const [buttonFifteen, setButtonFifteen] = useState(false)
 
+    const [buttonSixteen, setButtonSixteen] = useState(false)
+    const [buttonSeventeen, setButtonSeventeen] = useState(false)
+    const [buttonEighteen, setButtonEighteen] = useState(false)
+    const [buttonNineteen, setButtonNineteen] = useState(false)
+    const [buttonTwenty, setButtonTwenty] = useState(false)
+    const [buttonTwentyOne, setButtonTwentyOne] = useState(false)
+
+    const [markRed, setMarkRed] = useState(false)
+
+
     return (
-        <div className="w-full flex flex-col">
-            <div className="w-full text-center">
-                <h1 className="text-2xl">Fraction Slips</h1>
-                <p>
+        <div className="w-full flex flex-col py-4 text-3xl">
+            <div className="w-full text-center p-2">
+                <h1 className="text-5xl">Fraction Slips</h1>
+                <p className="text-3xl py-2">
                     <span>Result: {convertToFraction(resultOne)}</span>
                 </p>
+                <label className="inline-flex items-center cursor-pointer">BLUE
+                <input type="checkbox" className="sr-only peer" id="read" name="read" value="read" checked={markRed} onChange={() => {
+                    setMarkRed(!markRed);
+                  }}/>
+                <div className="mx-2 relative w-11 h-6 bg-blue-500 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-blue-500 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-red-600"></div>
+                <span className="-ml-1 ms-3 font-medium text-gray-900 dark:text-gray-300">RED</span>
+            </label>
             </div>
-            <div className="w-full flex flex-row"><button className={buttonOne ? "w-full border-2 text-center border-blue-500 text-blue-500" : "w-full border-2 text-center"} onClick={()=>{
+            <div className="w-full flex flex-row text-3xl"><button className={buttonOne && !markRed ? "w-full border-2 text-center border-blue-500 text-blue-500" : buttonOne && markRed ? "w-full border-2 text-center border-red-500 text-red-500" : "w-full border-2 text-center"} onClick={()=>{
                 setButtonOne(!buttonOne)
                 if(buttonOne){
                     setResultOne(closeToZero(resultOne - 1))
@@ -114,14 +135,14 @@ export default function Slips() {
                 }
             }}>1</button></div>
             <div className="w-full flex flex-row">
-                <button className={buttonTwo ? "w-1/2 border-2 text-center border-blue-500 text-blue-500" : "w-1/2 border-2 text-center"} onClick={()=>{
+                <button className={buttonTwo && !markRed ? "w-1/2 border-2 text-center border-blue-500 text-blue-500" : buttonTwo && markRed ? "w-1/2 border-2 text-center border-red-500 text-red-500" : "w-1/2 border-2 text-center"} onClick={()=>{
                 setButtonTwo(!buttonTwo)
                 if(buttonTwo){
                     setResultOne(closeToZero(resultOne - 1/2))
                 } else {
                     setResultOne(closeToZero(resultOne + 1/2))
                 }}}>1/2</button>
-                <button className={buttonThree ? "w-1/2 border-2 text-center border-blue-500 text-blue-500" : "w-1/2 border-2 text-center"} onClick={()=>{
+                <button className={buttonThree && !markRed ? "w-1/2 border-2 text-center border-blue-500 text-blue-500" : buttonThree && markRed ? "w-1/2 border-2 text-center border-red-500 text-red-500" : "w-1/2 border-2 text-center"} onClick={()=>{
                 setButtonThree(!buttonThree)
                 if(buttonThree){
                     setResultOne(closeToZero(resultOne - 1/2))
@@ -223,7 +244,51 @@ export default function Slips() {
                     setResultOne(closeToZero(resultOne + 1/5))
                 }}
             }>1/5</button>
+            </div>
 
+            <div className="w-full flex flex-row">
+            <button className={buttonSixteen ? "w-1/6 border-2 text-center border-blue-500 text-blue-500" : "w-1/6 border-2 text-center"} onClick={()=>{
+                setButtonSixteen(!buttonSixteen)
+                if(buttonSixteen){
+                    setResultOne(closeToZero(resultOne - 1/6))
+                } else {
+                    setResultOne(closeToZero(resultOne + 1/6))
+                }}} >1/6</button>
+            <button className={buttonSeventeen ? "w-1/6 border-2 text-center border-blue-500 text-blue-500" : "w-1/6 border-2 text-center"} onClick={()=>{
+                setButtonSeventeen(!buttonSeventeen)
+                if(buttonSeventeen){
+                    setResultOne(closeToZero(resultOne - 1/6))
+                } else {
+                    setResultOne(closeToZero(resultOne + 1/6))
+                }}}>1/6</button>
+            <button className={buttonEighteen ? "w-1/6 border-2 text-center border-blue-500 text-blue-500" : "w-1/6 border-2 text-center"} onClick={()=>{
+                setButtonEighteen(!buttonEighteen)
+                if(buttonEighteen){
+                    setResultOne(closeToZero(resultOne - 1/6))
+                } else {
+                    setResultOne(closeToZero(resultOne + 1/6))
+                }}}>1/6</button>
+            <button className={buttonNineteen ? "w-1/6 border-2 text-center border-blue-500 text-blue-500" : "w-1/6 border-2 text-center"} onClick={()=>{
+                setButtonNineteen(!buttonNineteen)
+                if(buttonNineteen){
+                    setResultOne(closeToZero(resultOne - 1/6))
+                } else {
+                    setResultOne(closeToZero(resultOne + 1/6))
+                }}}>1/6</button>
+            <button className={buttonTwenty ? "w-1/6 border-2 text-center border-blue-500 text-blue-500" : "w-1/6 border-2 text-center"} onClick={()=>{
+                setButtonTwenty(!buttonTwenty)
+                if(buttonTwenty){
+                    setResultOne(closeToZero(resultOne - 1/6))
+                } else {
+                    setResultOne(closeToZero(resultOne + 1/6))
+                }}}>1/6</button>
+            <button className={buttonTwentyOne ? "w-1/6 border-2 text-center border-blue-500 text-blue-500" : "w-1/6 border-2 text-center"} onClick={()=>{
+                setButtonTwentyOne(!buttonTwentyOne)
+                if(buttonTwentyOne){
+                    setResultOne(closeToZero(resultOne - 1/6))
+                } else {
+                    setResultOne(closeToZero(resultOne + 1/6))
+                }}}>1/6</button>
             </div>
 
         </div>
