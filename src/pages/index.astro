@@ -2,12 +2,14 @@
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import Slips from '../components/Slips.tsx';
+import Footer from '../components/Footer.astro';
 ---
 
 <Layout title="Fraction Slips">
 	<main>
 		<Slips client:only="react"/>
 	</main>
+	<Footer />
 </Layout>
 
 <style>

@@ -112,7 +112,7 @@ export default function Slips() {
 
 
     return (
-        <div className="w-full flex flex-col py-4 text-3xl">
+        <div className="w-full flex flex-col py-4 text-3xl h-screen">
             <div className="w-full text-center p-2">
                 <h1 className="text-5xl">Fraction Slips</h1>
                 <p className="text-3xl py-2">
