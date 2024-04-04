@@ -109,6 +109,7 @@ export default function Slips() {
     const [buttonTwentyOne, setButtonTwentyOne] = useState(false)
 
     const [markRed, setMarkRed] = useState(false)
+    const [divColor, setDivColor] = useState(["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""])
 
 
     return (
@@ -116,7 +117,7 @@ export default function Slips() {
             <div className="w-full text-center p-2">
                 <h1 className="text-5xl">Fraction Slips</h1>
                 <p className="text-3xl py-2">
-                    <span>Result: {convertToFraction(resultOne)}</span>
+                    {/* <button>Show/Hide:</button><span>Result: {convertToFraction(resultOne)}</span> */}
                 </p>
                 <label className="inline-flex items-center cursor-pointer">BLUE
                 <input type="checkbox" className="sr-only peer" id="read" name="read" value="read" checked={markRed} onChange={() => {
@@ -126,8 +127,14 @@ export default function Slips() {
                 <span className="-ml-1 ms-3 font-medium text-gray-900 dark:text-gray-300">RED</span>
             </label>
             </div>
-            <div className="w-full flex flex-row text-3xl"><button className={buttonOne && !markRed ? "w-full border-2 text-center border-blue-500 text-blue-500" : buttonOne && markRed ? "w-full border-2 text-center border-red-500 text-red-500" : "w-full border-2 text-center"} onClick={()=>{
+            <div className="w-full flex flex-row text-3xl"><button className={buttonOne && divColor[0] == "blue" ? "w-full border-2 text-center border-blue-500 text-blue-500" : buttonOne && divColor[0] == "red" ? "w-full border-2 text-center border-red-500 text-red-500" : "w-full border-2 text-center"} onClick={()=>{
                 setButtonOne(!buttonOne)
+                if(markRed){
+                    setDivColor(["red", ...divColor.slice(1, 26)])
+                }
+                else {
+                    setDivColor(["blue", ...divColor.slice(1, 26)])
+                }
                 if(buttonOne){
                     setResultOne(closeToZero(resultOne - 1))
                 } else {
@@ -135,15 +142,25 @@ export default function Slips() {
                 }
             }}>1</button></div>
             <div className="w-full flex flex-row">
-                <button className={buttonTwo && !markRed ? "w-1/2 border-2 text-center border-blue-500 text-blue-500" : buttonTwo && markRed ? "w-1/2 border-2 text-center border-red-500 text-red-500" : "w-1/2 border-2 text-center"} onClick={()=>{
+                <button className={buttonTwo && divColor[1] == "blue" ? "w-1/2 border-2 text-center border-blue-500 text-blue-500" : buttonTwo && divColor[1] == "red" ? "w-1/2 border-2 text-center border-red-500 text-red-500" : "w-1/2 border-2 text-center"} onClick={()=>{
                 setButtonTwo(!buttonTwo)
+                if(markRed){
+                    setDivColor([...divColor.slice(0, 1), "red", ...divColor.slice(2, 26)])
+                } else {
+                    setDivColor([...divColor.slice(0, 1), "blue", ...divColor.slice(2, 26)])
+                }
                 if(buttonTwo){
                     setResultOne(closeToZero(resultOne - 1/2))
                 } else {
                     setResultOne(closeToZero(resultOne + 1/2))
                 }}}>1/2</button>
-                <button className={buttonThree && !markRed ? "w-1/2 border-2 text-center border-blue-500 text-blue-500" : buttonThree && markRed ? "w-1/2 border-2 text-center border-red-500 text-red-500" : "w-1/2 border-2 text-center"} onClick={()=>{
+                <button className={buttonThree && divColor[2] == "blue" ? "w-1/2 border-2 text-center border-blue-500 text-blue-500" : buttonThree && divColor[2] == "red" ? "w-1/2 border-2 text-center border-red-500 text-red-500" : "w-1/2 border-2 text-center"} onClick={()=>{
                 setButtonThree(!buttonThree)
+                if(markRed){
+                    setDivColor([...divColor.slice(0, 2), "red", ...divColor.slice(3, 26)])
+                } else {
+                    setDivColor([...divColor.slice(0, 2), "blue", ...divColor.slice(3, 26)])
+                }
                 if(buttonThree){
                     setResultOne(closeToZero(resultOne - 1/2))
                 } else {
@@ -151,22 +168,37 @@ export default function Slips() {
                 }}}>1/2</button>
                 </div>
             <div className="w-full flex flex-row">
-            <button className={buttonFour ? "w-1/3 border-2 text-center border-blue-500 text-blue-500" : "w-1/3 border-2 text-center"} onClick={()=>{
+            <button className={buttonFour && divColor[3] == "blue" ? "w-1/3 border-2 text-center border-blue-500 text-blue-500" : buttonFour && divColor[3] == "red" ? "w-1/3 border-2 text-center border-red-500 text-red-500" : "w-1/3 border-2 text-center"} onClick={()=>{
                 setButtonFour(!buttonFour)
+                if(markRed){
+                    setDivColor([...divColor.slice(0, 3), "red", ...divColor.slice(4, 26)])
+                } else {
+                    setDivColor([...divColor.slice(0, 3), "blue", ...divColor.slice(4, 26)])
+                }
                 if(buttonFour){
                     setResultOne(closeToZero(resultOne - 1/3))
                 } else {
                     setResultOne(closeToZero(resultOne + 1/3))
                 }}}>1/3</button>
-            <button className={buttonFive ? "w-1/3 border-2 text-center border-blue-500 text-blue-500" : "w-1/3 border-2 text-center"} onClick={()=>{
+            <button className={buttonFive && divColor[4] == "blue" ? "w-1/3 border-2 text-center border-blue-500 text-blue-500" : buttonFive && divColor[4] == "red" ? "w-1/3 border-2 text-center border-red-500 text-red-500" : "w-1/3 border-2 text-center"} onClick={()=>{
                 setButtonFive(!buttonFive)
+                if(markRed){
+                    setDivColor([...divColor.slice(0, 4), "red", ...divColor.slice(5, 26)])
+                } else {
+                    setDivColor([...divColor.slice(0, 4), "blue", ...divColor.slice(5, 26)])
+                }
                 if(buttonFive){
                     setResultOne(closeToZero(resultOne - 1/3))
                 } else {
                     setResultOne(closeToZero(resultOne + 1/3))
                 }}}>1/3</button>
-            <button className={buttonSix ? "w-1/3 border-2 text-center border-blue-500 text-blue-500" : "w-1/3 border-2 text-center"} onClick={()=>{
+            <button className={buttonSix && divColor[5] == "blue" ? "w-1/3 border-2 text-center border-blue-500 text-blue-500" : buttonSix && divColor[5] == "red" ? "w-1/3 border-2 text-center border-red-500 text-red-500" : "w-1/3 border-2 text-center"} onClick={()=>{
                 setButtonSix(!buttonSix)
+                if(markRed){
+                    setDivColor([...divColor.slice(0, 5), "red", ...divColor.slice(6, 26)])
+                } else {
+                    setDivColor([...divColor.slice(0, 5), "blue", ...divColor.slice(6, 26)])
+                }
                 if(buttonSix){
                     setResultOne(closeToZero(resultOne - 1/3))
                 } else {
@@ -175,29 +207,50 @@ export default function Slips() {
             </div>
 
             <div className="w-full flex flex-row">
-            <button className={buttonSeven ? "w-1/4 border-2 text-center border-blue-500 text-blue-500" : "w-1/4 border-2 text-center"} onClick={()=>{
+            <button className={buttonSeven && divColor[6] == "blue" ? "w-1/4 border-2 text-center border-blue-500 text-blue-500" : buttonSeven && divColor[6] == "red" ? "w-1/4 border-2 text-center border-red-500 text-red-500" : "w-1/4 border-2 text-center"} onClick={()=>{
                 setButtonSeven(!buttonSeven)
+                if(markRed){
+                    setDivColor([...divColor.slice(0, 6), "red", ...divColor.slice(7, 26)])
+                } else {
+                    setDivColor([...divColor.slice(0, 6), "blue", ...divColor.slice(7, 26)])
+                }
                 if(buttonSeven){
                     setResultOne(closeToZero(resultOne - 1/4))
                 } else {
                     setResultOne(closeToZero(resultOne + 1/4))
                 }}}>1/4</button>
-            <button className={buttonEight ? "w-1/4 border-2 text-center border-blue-500 text-blue-500" : "w-1/4 border-2 text-center"} onClick={()=>{
+            <button className={buttonEight && divColor[7] == "blue" ? "w-1/4 border-2 text-center border-blue-500 text-blue-500" : buttonEight && divColor[7] == "red" ? "w-1/4 border-2 text-center border-red-500 text-red-500" : "w-1/4 border-2 text-center"} onClick={()=>{
                 setButtonEight(!buttonEight)
+                if(markRed){
+                    setDivColor([...divColor.slice(0, 7), "red", ...divColor.slice(8, 26)])
+                } else {
+                    setDivColor([...divColor.slice(0, 7), "blue", ...divColor.slice(8, 26)])
+                }
                 if(buttonEight){
                     setResultOne(closeToZero(resultOne - 1/4))
                 } else {
                     setResultOne(closeToZero(resultOne + 1/4))
                 }}}>1/4</button>
-            <button className={buttonNine ? "w-1/4 border-2 text-center border-blue-500 text-blue-500" : "w-1/4 border-2 text-center"} onClick={()=>{
+            <button className={buttonNine && divColor[8] == "blue" ? "w-1/4 border-2 text-center border-blue-500 text-blue-500" : buttonNine && divColor[8] == "red" ? "w-1/4 border-2 text-center border-red-500 text-red-500" : "w-1/4 border-2 text-center"} onClick={()=>{
                 setButtonNine(!buttonNine)
+                if(markRed){
+                    setDivColor([...divColor.slice(0, 8), "red", ...divColor.slice(9, 26)])
+                }
+                else {
+                    setDivColor([...divColor.slice(0, 8), "blue", ...divColor.slice(9, 26)])
+                }
                 if(buttonNine){
                     setResultOne(closeToZero(resultOne - 1/4))
                 } else {
                     setResultOne(closeToZero(resultOne + 1/4))
                 }}}>1/4</button>
-            <button className={buttonTen ? "w-1/4 border-2 text-center border-blue-500 text-blue-500" : "w-1/4 border-2 text-center"} onClick={()=>{
+            <button className={buttonTen && divColor[9] == "blue" ? "w-1/4 border-2 text-center border-blue-500 text-blue-500" : buttonTen && divColor[9] == "red" ? "w-1/4 border-2 text-center border-red-500 text-red-500" : "w-1/4 border-2 text-center"} onClick={()=>{
                 setButtonTen(!buttonTen)
+                if(markRed){
+                    setDivColor([...divColor.slice(0, 9), "red", ...divColor.slice(10, 26)])
+                } else {
+                    setDivColor([...divColor.slice(0, 9), "blue", ...divColor.slice(10, 26)])
+                }
                 if(buttonTen){
                     setResultOne(closeToZero(resultOne - 1/4))
                 } else {
